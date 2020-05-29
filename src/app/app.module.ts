@@ -13,6 +13,7 @@ import { AuthorsComponent } from './authors/authors.component';
 import { AuthorComponent } from './author/author.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LikeComponent } from './like/like.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AuthorsComponent,
     AuthorComponent,
     SummaryPipe,
-    FavoriteComponent
+    FavoriteComponent,
+    LikeComponent
   ],
   imports: [
     BrowserModule,
