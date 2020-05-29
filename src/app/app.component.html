@@ -1,3 +1,10 @@
 <h1>Angular</h1>
 <courses></courses>
 <authors></authors>
+<div>
+    <favorite></favorite>
+    <favorite [fav]="true"></favorite>
+    <favorite></favorite>
+    <favorite [fav]="true" (change)="onFourthStar($event)"></favorite>
+    <favorite></favorite>
+</div>
