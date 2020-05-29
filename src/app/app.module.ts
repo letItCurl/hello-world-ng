@@ -1,7 +1,9 @@
+import { SummaryPipe } from './summary.pipe';
 import { AuthorService } from './author.service';
 import { CourseService } from './courses.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,11 +18,13 @@ import { AuthorComponent } from './author/author.component';
     CoursesComponent,
     CourseComponent,
     AuthorsComponent,
-    AuthorComponent
+    AuthorComponent,
+    SummaryPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
 ],
   providers: [CourseService,
               AuthorService],
