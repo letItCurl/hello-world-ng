@@ -1,5 +1,39 @@
 <h1>Angular</h1>
 
+
+
+<button class="btn btn-primary" (click)="onAdd()">Add</button>
+<button class="btn btn-primary" (click)="loadCourses()">Load Courses</button>
+
+<ul>
+    <!-- trackBy <3 -->
+    <li *ngFor="let course of courses; index as i; even as isEven; trackBy: trackCourse">
+        index in for: {{i}} name-> {{course.name}} <span *ngIf='isEven'>[EVEN]</span>
+        <button (click)="onRemove(course)" class="btn btn-danger">Remove</button>
+        <button (click)="onChange(course)" class="btn btn-warning">CHANGE</button>
+        <button (click)="onChangeFor(course)" class="btn btn-warning">CHANGE FOR</button>
+    </li>
+</ul>
+
+<!-- ng switch -->
+<ul class="nav nav-pills">
+    <li [class.active]="viewMode == 'map'"><a href="#" (click)="viewMode = 'map'">Map View</a></li>
+    <li [class.active]="viewMode == 'list'"> <a href="#" (click)="viewMode = 'list'">List View</a></li>
+</ul>
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map view</div>
+    <div *ngSwitchCase="'list'">list view</div>
+    <div *ngSwitchDefault="'list'">Default</div>
+</div>
+
+
+<!-- non descruvtives directives -->
+<div [hidden]="courses.length > 0">
+    Courses List
+</div>
+<div [hidden]="courses.length == 0">
+    No courses yet
+</div>
 <!-- destruvtives directives -->
 <div *ngIf="courses.length > 0; then coursesList else noCourses "></div>
 <ng-template #coursesList>
