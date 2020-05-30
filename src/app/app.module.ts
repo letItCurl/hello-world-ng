@@ -15,6 +15,7 @@ import { AuthorComponent } from './author/author.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LikeComponent } from './like/like.component';
+import { InputFormatDirective } from './input-format.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LikeComponent } from './like/like.component';
     AuthorComponent,
     SummaryPipe,
     FavoriteComponent,
-    LikeComponent
+    LikeComponent,
+    InputFormatDirective
   ],
   imports: [
     BrowserModule,
