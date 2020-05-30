@@ -1,13 +1,34 @@
 <h1>Angular</h1>
-<app-like [likeCount]="tweet.likesCount"
-[isLike?]="tweet.isLiked"></app-like>
+
+<!-- destruvtives directives -->
+<div *ngIf="courses.length > 0; then coursesList else noCourses "></div>
+<ng-template #coursesList>
+    Courses List
+</ng-template>
+<ng-template #noCourses>
+    No courses yet
+</ng-template>
+
+<!-- component API -->
+<app-like 
+    [likeCount]="tweet.likesCount"
+    [isLike?]="tweet.isLiked">
+</app-like>
+
 <app-like></app-like>
+
 <courses></courses>
+
+<!-- Basic component -->
 <authors></authors>
+
+
+
 <div>
     <favorite></favorite>
     <favorite [fav]="true"></favorite>
     <favorite></favorite>
+    <!-- event creation -->
     <favorite [fav]="true" (change)="onFourthStar($event)"></favorite>
     <favorite></favorite>
 </div>

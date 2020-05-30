@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LikeService {
 
+  // just TS class
   tweet = {
     likesCount: 500,
     isLiked: true

@@ -1,3 +1,4 @@
+import { LikeService } from './like.service';
 import { SummaryPipe } from './summary.pipe';
 import { AuthorService } from './author.service';
 import { CourseService } from './courses.service';
@@ -32,8 +33,10 @@ import { LikeComponent } from './like/like.component';
     FormsModule,
     FontAwesomeModule
 ],
+  // providers for to get around new in constructor
   providers: [CourseService,
-              AuthorService],
+              AuthorService,
+              LikeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
