@@ -1,12 +1,34 @@
-<form>
-    <div class="form-group">
-        <label for="firstName">First name</label>
-        <input required minlength="3" maxlength="10" pattern="banana" ngModel (change)="log(firstName)" #firstName="ngModel" name="firstName" id="firstName" type="text" class="form-control"> 
-        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
-            First name not valid:
-            <div *ngIf="firstName.errors.required">It is required</div>
-            <div *ngIf="firstName.errors.minlength" >too short</div>
-            <div *ngIf="firstName.errors.pattern" >not the good word</div>
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div ngModelGroup="contact" #contact="ngModelGroup">        
+        <div *ngIf="contact.touched && !contact.valid">...</div>
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input 
+            required 
+            minlength="3" 
+            maxlength="10" 
+            pattern="banana" 
+            ngModel
+            name="firstName"
+            #firstName="ngModel" 
+            (change)="log(firstName)"   
+            id="firstName" 
+            type="text" 
+            class="form-control"> 
+            <div 
+            class="alert alert-danger" 
+            *ngIf="firstName.touched && !firstName.valid">
+                First name not valid:
+                <div *ngIf="firstName.errors.required">
+                    It is required
+                </div>
+                <div *ngIf="firstName.errors.minlength" >
+                    too short
+                </div>
+                <div *ngIf="firstName.errors.pattern" >
+                    not the good word
+                </div>
+            </div>
         </div>
     </div>
 
@@ -14,5 +36,37 @@
         <label for="comment">Comment</label>
         <textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
     </div>
-    <button class="btn btn-primary">Submit</button>
+
+    <div class="checkbox">
+        <label>
+            <!-- name + ngModel is mandatory -->
+            <input type="checkbox" ngModel name="isSubscribed"> Subscribe to mail list
+            <!-- it will refere to the attr in the final ngSubmit output -->
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label for="contactMethod">Contact Method</label>
+        <!-- can be multiple or not -->
+        <select multiple ngModel name="contactMethod" id="contactMethod" class="form-control">
+            <option value="">select an option...</option>
+            <!--or [ngValue]="method"  -->
+            <option *ngFor="let method of contactMethods" [value]="method.id">{{method.name}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div *ngFor="let method of contactMethods" class="radio">
+            <label for="">
+                <input ngModel type="radio" name="contactMethod" [value]="method.id">
+                {{method.name}}
+            </label>
+        </div>
+    </div>
+
+    <p>
+        {{ f.value | json}}
+    </p>
+
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>
