@@ -9,6 +9,7 @@
         <div *ngIf="validate(this.username)" class="alert alert-danger">
             <div *ngIf="username.errors.required" >Username is required</div>
             <div *ngIf="username.errors.cannotContainSpace" >Username cannnot contain space</div>
+            <div *ngIf="username.errors.shouldBeUnique" >Username already taken</div>
             <div *ngIf="username.errors.minlength" >Username should be minimum {{username.errors.minlength.requiredLength}} character</div>
         </div>
     </div>
