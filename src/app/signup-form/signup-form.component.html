@@ -1,25 +1,35 @@
-<form [formGroup]="form">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input
-            formControlName="username" 
-            id="username" 
-            type="text" 
-            class="form-control">
-        <div *ngIf="validate(this.username)" class="alert alert-danger">
-            <div *ngIf="username.errors.required" >Username is required</div>
-            <div *ngIf="username.errors.cannotContainSpace" >Username cannnot contain space</div>
-            <div *ngIf="username.errors.shouldBeUnique" >Username already taken</div>
-            <div *ngIf="username.errors.minlength" >Username should be minimum {{username.errors.minlength.requiredLength}} character</div>
+<!-- (ngSubmit) is an event output -->
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">
+        credentials are invalid...
+    </div>
+    <!-- this will prefix with "account" all child fields -->
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input
+                formControlName="username" 
+                id="username" 
+                type="text" 
+                class="form-control">
+            <!-- pending for unresolved validation -->
+            <div *ngIf="username.pending" class="alert alert-warning">Checking for uniqueness</div>
+            <div *ngIf="validate(this.username)" class="alert alert-danger">
+                <div *ngIf="username.errors.required" >Username is required</div>
+                <div *ngIf="username.errors.cannotContainSpace" >Username cannnot contain space</div>
+                <div *ngIf="username.errors.shouldBeUnique" >Username already taken</div>
+                <div *ngIf="username.errors.minlength" >Username should be minimum {{username.errors.minlength.requiredLength}} character</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+                formControlName="password" 
+                id="password" 
+                type="text" 
+                class="form-control">
         </div>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input 
-            formControlName="password" 
-            id="password" 
-            type="text" 
-            class="form-control">
-    </div>
     <button class="btn btn-primary" type="submit">Sign Up</button>
+
 </form>

@@ -11,11 +11,12 @@ export class UsernameValidators {
 
     // async validator
     static shouldBeUnique(control: AbstractControl): Promise<ValidationErrors | null>{
-        
+        //  check interfaces....
         return new Promise((resolve, reject)=>{
             setTimeout(()=>{
                 console.log('ok')
                 if((control.value as string) == 'roro')
+                    // resole is like return
                     resolve({ shouldBeUnique: true })
                 else resolve(null)
             },900)
