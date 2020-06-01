@@ -10,7 +10,8 @@ export class PostsComponent implements OnInit {
 
   posts;
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 
+      'Content-Type': 'application/json'}),
   };
   private url = "https://jsonplaceholder.typicode.com/todos/";
 
@@ -22,7 +23,8 @@ export class PostsComponent implements OnInit {
     this.http
     .get(this.url)
     .subscribe(response =>{
-      this.posts = response;
+      this.posts = response.slice(0, 10);
+      
     });
   }
 
@@ -42,6 +44,15 @@ export class PostsComponent implements OnInit {
       console.log(response)
     })
     // put  replace the object
+  }
+
+  deletePost(post){
+    this.http
+    .delete(this.url+`${post.id}`)
+    .subscribe(res =>{
+      let index = this.posts.indexOf(post);
+      this.posts.splice(index, 1)
+    })
   }
 
 }
