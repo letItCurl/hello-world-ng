@@ -6,6 +6,8 @@ import { CourseService } from './courses.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { ChangePasswordFormComponent } from './change-password-form/change-passw
     CourseFormComponent,
     SignupFormComponent,
     NewCourseFormComponent,
-    ChangePasswordFormComponent
+    ChangePasswordFormComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { ChangePasswordFormComponent } from './change-password-form/change-passw
     FormsModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    HttpClientModule,
 ],
   // providers for to get around new in constructor
   providers: [CourseService,
