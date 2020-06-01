@@ -1,3 +1,4 @@
+import { PostService } from './services/post.service';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { LikeService } from './like.service';
 import { SummaryPipe } from './summary.pipe';
@@ -7,7 +8,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,16 +47,17 @@ import { PostsComponent } from './posts/posts.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    HttpClientModule,
 ],
   // providers for to get around new in constructor
   providers: [CourseService,
               AuthorService,
-              LikeService],
+              LikeService,
+              PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

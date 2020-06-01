@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { PostService } from './../services/post.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,28 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class PostsComponent implements OnInit {
 
   posts;
-  httpOptions = {
-    headers: new HttpHeaders({ 
-      'Content-Type': 'application/json'}),
-  };
-  private url = "https://jsonplaceholder.typicode.com/todos/";
-
-  constructor(private http: HttpClient) {
-    
-   }
+  
+  constructor(private service: PostService) { }
 
   ngOnInit(): void {
-    this.http
-    .get(this.url)
+    this.service.getPost()
     .subscribe(response =>{
-      this.posts = response.slice(0, 10);
-      
+      this.posts = response;
     });
   }
 
   createPost(input: HTMLInputElement){
     let post = {title: input.value};
-    this.http.post(this.url, post, this.httpOptions).subscribe(response =>{
+    this.service.createPost(post).subscribe(response =>{
       post['id'] = response['id'];
       this.posts.unshift(post);
       input.value = "";
@@ -40,15 +31,15 @@ export class PostsComponent implements OnInit {
 
   updatePost(post){
     // patch will just fill the diff
-    this.http.patch(this.url+`${post.id}`, {isRead: true}, this.httpOptions).subscribe(response=>{
+    this.service.updatePost(post)
+    .subscribe(response=>{
       console.log(response)
     })
     // put  replace the object
   }
 
   deletePost(post){
-    this.http
-    .delete(this.url+`${post.id}`)
+    this.service.deletePost(post)
     .subscribe(res =>{
       let index = this.posts.indexOf(post);
       this.posts.splice(index, 1)
