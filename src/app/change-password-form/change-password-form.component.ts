@@ -1,5 +1,6 @@
+import { PasswordValidators } from './password.validators';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-change-password-form',
@@ -8,13 +9,11 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 })
 export class ChangePasswordFormComponent implements OnInit {
 
-  // TODO => finish exerscice / validartors....
-
   form: FormGroup
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
-      password: ['', Validators.required],
+      password: ['', Validators.required, PasswordValidators.isInValid],
       confirmation: fb.group({
         newPassword: ['', [Validators.required, Validators.minLength(6)]],
         passwordConfirmation: ['', Validators.required] 
@@ -26,11 +25,19 @@ export class ChangePasswordFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("ok?")
+    console.log("DONE !")
   }
 
   showErrors(field: AbstractControl){
     return (field.invalid && field.touched);
+  }
+
+  check(passwordConfirmation: FormControl){
+    if(passwordConfirmation.value != this.newPassword.value){
+      this.passwordConfirmation.setErrors({
+        notMatch: true
+      })
+    }
   }
 
   get password() {
