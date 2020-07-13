@@ -3,7 +3,7 @@
 
 # About me
 
-<table style="border: none;">
+<table>
   <tr>
     <td>
       <div style="width: 120px;">
